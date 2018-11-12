@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.xiao.dao.Dao">
+
+	<cache eviction="FIFO" flushInterval="60000" size="500" readOnly="true"></cache>
+
+
+	<select id="checkUser" parameterType="User" resultType="User">
+   		select*from tbl_user where name=#{name} and password=#{password};
+   </select>
+    <select id="selectAllUsers" resultType="User">
+   		select*from tbl_user;
+   </select>
+   <update id="updateUser1" parameterType="hashmap">
+   		update tbl_user set name=#{name},password=#{password},email=#{email} where id=#{id};
+   </update>
+   
+   <update id="updateUser" parameterType="User">
+   		update tbl_user set name=#{name},password=#{password},email=#{email} where id=#{id};
+   </update>
+   
+   <delete id="deleteUser" parameterType="int">
+   		delete from tbl_user where id=#{id};
+   </delete>
+   <insert id="createUser" parameterType="User">
+   		insert into tbl_user(name,password,email) values(#{name},#{password},#{email});
+   </insert>
+	
+	<select id="selectAllIdentity" resultType="Identity">
+		select * from tbl_identity;
+	</select>
+	
+</mapper> 
